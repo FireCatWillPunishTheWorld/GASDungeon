@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
+#include "GASDungeon/GASDungeon.h"
 #include "GASDungeon/Interaction/EnemyInterface.h"
 #include "AuraEnemy.generated.h"
+
 
 /**
  * 

@@ -34,6 +34,13 @@ void AAuraCharacterBase::InitAbilityActorInfo()
 	
 }
 
+void AAuraCharacterBase::InitializePrimaryAttributes()
+{
+	const FGameplayEffectContextHandle ContextHandle=GetAbilitySystemComponent()->MakeEffectContext();
+	const FGameplayEffectSpecHandle SpecHandle= GetAbilitySystemComponent()->MakeOutgoingSpec(DefaultPrimaryAttributes,1.0f,ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(),GetAbilitySystemComponent());
+}
+
 // Called to bind functionality to input
 void AAuraCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
