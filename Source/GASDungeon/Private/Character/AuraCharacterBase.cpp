@@ -34,17 +34,29 @@ void AAuraCharacterBase::InitAbilityActorInfo()
 	
 }
 
-void AAuraCharacterBase::InitializePrimaryAttributes()
+void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
 {
-	const FGameplayEffectContextHandle ContextHandle=GetAbilitySystemComponent()->MakeEffectContext();
-	const FGameplayEffectSpecHandle SpecHandle= GetAbilitySystemComponent()->MakeOutgoingSpec(DefaultPrimaryAttributes,1.0f,ContextHandle);
+	check(IsValid(GetAbilitySystemComponent()));
+	check(GameplayEffectClass);
+	FGameplayEffectContextHandle ContextHandle=GetAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
+	const FGameplayEffectSpecHandle SpecHandle= GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass,Level,ContextHandle);
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(),GetAbilitySystemComponent());
 }
+
+void AAuraCharacterBase::InitializeDefaultAttributes() const
+{
+	ApplyEffectToSelf(DefaultVitalAttributes,1.f);
+	ApplyEffectToSelf(DefaultPrimaryAttributes,1.f);
+	ApplyEffectToSelf(DefaultSecondaryAttributes,1.f);
+	
+}
+
+
 
 // Called to bind functionality to input
 void AAuraCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 

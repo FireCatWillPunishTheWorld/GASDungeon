@@ -19,8 +19,11 @@ class GASDUNGEON_API AAuraPlayerState : public APlayerState,public IAbilitySyste
 	GENERATED_BODY()
 public:
 	AAuraPlayerState();
+	//virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const{return AttributeSet;}
+
+	FORCEINLINE int32 GetPlayerLevel() const{return Level;}
 protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAuraAbilitySystemComponent> AbilitySystemComponent;
@@ -28,5 +31,9 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
+	int32 Level=1;
+
+	
 	
 };

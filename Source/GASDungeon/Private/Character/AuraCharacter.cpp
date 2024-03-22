@@ -29,15 +29,25 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 	
 }
 
+int32 AAuraCharacter::GetPlayerLevel()
+{
+	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	return AuraPlayerState->GetPlayerLevel();
+	
+}
+
 void AAuraCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 
 	InitAbilityActorInfo();
-}
+} 
 
 void AAuraCharacter::InitAbilityActorInfo()
 {
+	//这是通过PlayerState来初始化AbilityActorInfo的一种方式
+	//还有一种方式是在角色蓝图中指定DefaultStartingData用GE蓝图资产来初始化
 	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
@@ -51,5 +61,6 @@ void AAuraCharacter::InitAbilityActorInfo()
 		{
 			AuraHUD->InitOverlay(AuraPlayerController,AuraPlayerState,AbilitySystemComponent,AttributeSet);
 		}		
-	}	
+	}
+	InitializeDefaultAttributes();
 }	

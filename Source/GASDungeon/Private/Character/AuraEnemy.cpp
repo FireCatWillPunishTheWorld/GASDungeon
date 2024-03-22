@@ -3,6 +3,7 @@
 
 #include "Character/AuraEnemy.h"
 
+#include "EditorDirectories.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 
@@ -19,6 +20,11 @@ AAuraEnemy::AAuraEnemy()
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>(TEXT("AttributeSet"));
+}
+
+int32 AAuraEnemy::GetPlayerLevel()
+{
+	return Level;
 }
 
 void AAuraEnemy::BeginPlay()

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "InputMappingContext.h"
 #include "GameFramework/PlayerController.h"
-#include "GASDungeon/Interaction/EnemyInterface.h"
+#include "Interaction/EnemyInterface.h"
 #include "AuraPlayerController.generated.h"
 
 /**

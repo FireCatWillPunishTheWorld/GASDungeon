@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Character/AuraCharacterBase.h"
 #include "GASDungeon/GASDungeon.h"
-#include "GASDungeon/Interaction/EnemyInterface.h"
+#include "Interaction/EnemyInterface.h"
 #include "AuraEnemy.generated.h"
 
 
@@ -23,7 +23,12 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	bool bHighLightActor=false;
 	
+	/** CombatInterface **/
+	virtual int32 GetPlayerLevel() override;
 protected:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
+	int32 Level=1;
+	
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
 	// virtual void HighLightActor_Implementation() override;
