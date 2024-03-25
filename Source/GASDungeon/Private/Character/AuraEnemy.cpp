@@ -7,7 +7,7 @@
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 
-DEFINE_LOG_CATEGORY(AURALOG)
+DEFINE_LOG_CATEGORY( AURALOG );
 
 AAuraEnemy::AAuraEnemy()
 {
@@ -34,9 +34,9 @@ void AAuraEnemy::BeginPlay()
 }
 
 void AAuraEnemy::InitAbilityActorInfo()
-{
-	
+{	
 	const FString ActorName=GetName();
+	UE_LOG(LogTemp,Warning,TEXT("InitAbilityActorInfo() called on AuraEnemy::%s"),*ActorName);
 	AURA_LOG(Warning, TEXT("InitAbilityActorInfo() called on AuraEnemy::%s"), *ActorName);
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
